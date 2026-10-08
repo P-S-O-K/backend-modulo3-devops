@@ -1,0 +1,51 @@
+
+name: Cambiar driver de base de datos
+
+on:
+  workflow_dispatch:
+    inputs:
+      database:
+        description: "Selecciona el motor de base de datos"
+        required: true
+        type: choice
+        default: postgres
+        options:
+          - mysql
+          - postgres
+          - mongo
+
+jobs:
+  seleccionar-driver:
+    name: Seleccionar driver
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Mostrar driver seleccionado
+        env:
+          DATABASE: ${{ inputs.database }}
+        run: |
+          echo "Motor seleccionado: $DATABASE"
+
+      - name: Validar driver
+        env:
+          DATABASE: ${{ inputs.database }}
+        run: |
+          case "$DATABASE" in
+            mysql|postgres|mongo)
+              echo "Driver valido: $DATABASE"
+              ;;
+            *)
+              echo "ERROR: Driver no permitido"
+              exit 1
+              ;;
+          esac
+
+      - name: Confirmar seleccion
+        env:
+          DATABASE: ${{ inputs.database }}
+        run: |
+          echo "MY_DATABASE_DRIVER=$DATABASE"
+          echo "Seleccion del driver completada correctamente"
