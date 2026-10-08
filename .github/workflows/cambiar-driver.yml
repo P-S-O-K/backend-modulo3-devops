@@ -1,0 +1,22 @@
+
+name: Cambiar driver de base de datos
+
+on:
+  workflow_dispatch:
+    inputs:
+      database:
+        description: "Selecciona el motor de base de datos"
+        required: true
+        type: choice
+        options:
+          - mysql
+          - postgres
+          - mongo
+
+jobs:
+  seleccionar-driver:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mostrar driver seleccionado
+        run: echo "Motor seleccionado: ${{ inputs.database }}"
