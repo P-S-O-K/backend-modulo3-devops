@@ -1,4 +1,3 @@
-
 name: Cambiar driver de base de datos
 
 on:
@@ -19,4 +18,7 @@ jobs:
 
     steps:
       - name: Mostrar driver seleccionado
-        run: echo "Motor seleccionado: ${{ inputs.database }}"
+        env:
+          DATABASE: ${{ inputs.database }}
+        run: |
+          echo "Motor seleccionado: $DATABASE"
