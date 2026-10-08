@@ -1,0 +1,11 @@
+# Scripts Linux
+*.sh text eol=lf
+
+# Docker
+Dockerfile text eol=lf
+
+# Archivos de configuracion
+*.yaml text eol=lf
+*.yml text eol=lf
+*.tf text eol=lf
+*.hcl text eol=lf

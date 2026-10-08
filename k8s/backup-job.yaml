@@ -1,0 +1,48 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-backup-test
+  namespace: backend-modulo3
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: postgres-backup
+          image: psokev99/backend-backup:1.0
+          imagePullPolicy: Always
+
+          envFrom:
+            - configMapRef:
+                name: backend-config
+            - secretRef:
+                name: backend-secret
+
+          env:
+            - name: S3_BUCKET
+              value: "bucket-codigo-backup-psokev99-modulo3"
+
+            - name: BACKUP_PREFIX
+              value: "paz-soldan/database"
+
+            - name: AWS_PROFILE
+              value: "terraform-modulo3"
+
+            - name: AWS_SHARED_CREDENTIALS_FILE
+              value: "/root/.aws/credentials"
+
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+
+          volumeMounts:
+            - name: aws-credentials
+              mountPath: /root/.aws
+              readOnly: true
+
+      volumes:
+        - name: aws-credentials
+          secret:
+            secretName: aws-backup-credentials
+            defaultMode: 0400
