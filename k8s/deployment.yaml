@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: backend-modulo3
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-modulo3
+  template:
+    metadata:
+      labels:
+        app: backend-modulo3
+    spec:
+      containers:
+        - name: backend
+          image: psokev99/backend-modulo3:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: backend-config
+            - secretRef:
+                name: backend-secret
