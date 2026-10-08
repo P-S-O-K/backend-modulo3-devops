@@ -1,2 +1,24 @@
-node_modules/
+@"
+
+# Respaldos locales
+backups/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.tfplan
+
+# Credenciales y configuracion local
+.aws/
+credentials
+"@ | Add-Content .gitignore
+# Variables de entorno
 .env
+.env.*
+!.env.example
+
+# Dependencias Node.js
+node_modules/
