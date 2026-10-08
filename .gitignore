@@ -21,3 +21,5 @@ credentials
 
 # Dependencias Node.js
 node_modules/
+# Planes de Terraform
+*.tfplan

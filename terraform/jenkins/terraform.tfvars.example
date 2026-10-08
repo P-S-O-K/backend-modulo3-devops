@@ -1,0 +1,5 @@
+aws_region    = "us-east-1"
+aws_profile   = "terraform-modulo3"
+instance_type = "t3.medium"
+project_name  = "jenkins-modulo3"
+allowed_cidr  = "38.250.154.208/32"
