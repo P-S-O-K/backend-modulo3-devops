@@ -20,5 +20,4 @@ jobs:
       - name: Mostrar driver seleccionado
         env:
           DATABASE: ${{ inputs.database }}
-        run: |
-          echo "Motor seleccionado: $DATABASE"
+        run: 'echo "Motor seleccionado: ${{ inputs.database }}"'
